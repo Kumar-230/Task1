@@ -1,0 +1,42 @@
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+#include<ctype.h>
+#include<stdio.h>
+#include<math.h>
+void main()
+{
+clrscr();
+int A[200],ini,t,i,j,B[200],n,dist,mark;
+i=j=n=dist=0;
+char c;
+cout<<"Init floor: ";
+cin>>ini;
+cout<<"\nEnter array: ";
+do{ scanf("%d%c", &A[n++],&c);}while(c!='\n');
+B[0]=ini;
+for(i=0;i<n-1;i++)
+ for(j=0;j<n-1-i;j++)
+ if(A[j]>A[j+1])
+ { t=A[j];A[j]=A[j+1];A[j+1]=t;}
+for(i=0;i<n;i++)
+ if(A[i]>ini)
+  {mark=i;break;}
+for(i=mark,j=1;i<n;i++)
+B[j++]=A[i];
+for(i=mark-1;i>=0;i--)
+B[j++]=A[i];
+for(j=0;j<=n;j++)
+{if(j!=n)dist+=fabs(B[j+1]-B[j]); cout<<B[j]<<' '; }
+cout<<"\nTotal Distance: "<<dist;
+cout<<"\nAnother possibility:\n";
+for(i=mark-1,j=1;i>=0;i--)
+B[j++]=A[i];
+for(i=mark;i<n;i++)
+B[j++]=A[i];
+for(j=0,dist=0;j<=n;j++)
+{if(j!=n)dist+=fabs(B[j+1]-B[j]); cout<<B[j]<<' '; }
+cout<<"\nTotal Distance: "<<dist;
+
+getch();
+}
