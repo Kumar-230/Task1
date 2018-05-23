@@ -1,0 +1,61 @@
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+#include<ctype.h>
+void encrypt(char C[200][200],int n,int k)
+{ char E[200],c;
+  for(int i=0;i<n;i++)
+   for(int j=0;j<strlen(C[i]);j++)
+      { c=C[i][j];
+	if(isalpha(c))
+	 {
+	  if(isupper(c))
+	   { if((c+k)>90)
+	     C[i][j]='A'+k-('Z'-c)-1;
+	     else
+	     C[i][j]=char(c+k);}
+	  else
+	  {  if((c+k)>122)
+	     C[i][j]='a'+k-('z'-c)-1;
+	     else
+	     C[i][j]=char(c+k);
+	  }}}
+   for(i=0;i<n;i++)
+   cout<<'\n'<<C[i];
+}
+void decrypt(char D[200][200],int n,int k)
+{  char E[200],c;
+   for(int i=0;i<n;i++)
+   for(int j=0;j<strlen(D[i]);j++)
+      { c=D[i][j];
+	if(isalpha(c))
+	 {
+	  if(isupper(c))
+	   { if((c-k)<65)
+	     D[i][j]='Z'-(k-(c-'A'))+1;
+	     else
+	     D[i][j]=char(c-k);}
+	  else
+	   { if((c-k)<97)
+	     D[i][j]='z'-(k-(c-'a'))+1;
+	     else
+	     D[i][j]=char(c-k);
+	  }}}
+   for(i=0;i<n;i++)
+   cout<<'\n'<<D[i];
+}
+void main()
+{
+clrscr();
+int i,n,k;
+char C[200][200],D[200][200];
+cout<<"Enter number: ";cin>>n;
+cout<<"\nEnter key: ";cin>>k;
+for(i=0;i<n;i++)
+cin>>C[i];
+for(i=0;i<n;i++)
+cin>>D[i];
+encrypt(C,n,k);
+decrypt(D,n,k);
+getch();
+}
